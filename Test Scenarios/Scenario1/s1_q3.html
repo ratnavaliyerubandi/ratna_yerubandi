@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="usermgmtApp">
+<head>
+    <script src="~/Scripts/angular.js"></script>
+</head>
+<body ng-controller="usermgmtController"> 
+    <h1>User Information:</h1>
+    <form ng-submit="submitStudnetForm()" >
+            <label for="userName" >User Name: </label><br />
+            <input type="text" id="userName" ng-model="user.name" /> <br />
+
+            <label for="email">Email</label><br />
+                <input type="email" id="userEmail" ng-model="user.email" /> <br />
+                
+            <label for="password" >Password</label><br />
+                <input type="password" id="password" ng-model="user.password" /> <br /><br />
+
+            <label for="organisation" >Organization: </label><br />
+            <input type="text" id="organisation" ng-model="user.organisation" /> <br />
+
+            <span>Terms & Conditions:</span><br />
+                <label><input value="condition_1" type="radio" name="condition 2" ng-model="user.condition1" />Condition 1</label><br />
+                <label><input value="condition_2" type="radio" name="condition_2" ng-model="user.condition2" />Condition 2</label> <br /><br />
+
+            <label for="address_line_1" >Address Line 1: </label><br />
+            <input type="text" id="address_line_1" ng-model="user.address_line_1" /> <br />
+
+            <label for="address_line_2" >Address Line 2: </label><br />
+            <input type="text" id="address_line_2" ng-model="user.address_line_2" /> <br />
+
+            <label for="address_line_3" >Address Line 3: </label><br />
+            <input type="text" id="address_line_3" ng-model="user.address_line_3" /> <br />
+            
+            <label for="address" >user.address</label><br />
+
+       
+        <input type="submit" value="Submit" />
+        <input type="reset" ng-click="resetForm()" value="Reset" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,10 @@
+        usermgmtApp.controller("usermgmtController", [ '$scope', function($scope) {
+    		angular.extend($scope, {
+        		address_line_1: '',
+        		address_line_2: '',
+        		address_line_3: '',
+        		address: function() { 
+            	return $scope.address_line_1 + ' ' + $scope.address_line_2 + ' ' + $scope.address_line_3; 
+        		}
+    		});
+		}]);

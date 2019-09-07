@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="usermgmtApp">
+<head>
+    <script src="~/Scripts/angular.js"></script>
+</head>
+<body ng-controller="usermgmtController"> 
+    <h1>User Information:</h1>
+    <form ng-submit="submitStudnetForm()" >
+            <label for="userName" >User Name: </label><br />
+            <input type="text" id="userName" ng-model="user.name" /> <br />
+
+            <label for="email">Email</label><br />
+                <input type="email" id="userEmail" ng-model="user.email" /> <br />
+                
+            <label for="password" >Password</label><br />
+                <input type="password" id="password" ng-model="user.password" /> <br /><br />
+
+            <label for="organisation" >Organization: </label><br />
+            <input type="text" id="organisation" ng-model="user.organisation" /> <br />
+
+            <span>Terms & Conditions:</span><br />
+                <label><input value="condition_1" type="radio" name="condition 2" ng-model="user.condition1" />Condition 1</label><br />
+                <label><input value="condition_2" type="radio" name="condition_2" ng-model="user.condition2" />Condition 2</label> <br /><br />
+       
+        <input type="submit" value="Submit" />
+        <input type="reset" ng-click="resetForm()" value="Reset" />
+    </form>
+    <script>
+        var usermgmtApp = angular.module('usermgmtApp', []);
+
+        usermgmtApp.controller("usermgmtController", function ($scope, $http) {
+  
+            $scope.originalUser = {
+                userName: '',
+                email: '',
+                password: '',
+                organisation: '',
+                condition_1: false,
+                condition_2: false
+            };
+
+            $scope.user = angular.copy($scope.originalUser);
+
+            $scope.submitUsertForm = function () {
+
+                var onSuccess = function (data, status, headers, config) {
+                    alert('User saved successfully.');
+                };
+
+                var onError = function (data, status, headers, config) {
+                    alert('Error occured.');
+                }
+
+                $http.post('/user/submitData', { user:$scope.user })
+                    .success(onSuccess)
+                    .error(onError);
+
+            };
+
+            $scope.resetForm = function () {
+                $scope.user = angular.copy($scope.originalUser);
+            };
+    });
+    </script>    
+</body>
+</html>
