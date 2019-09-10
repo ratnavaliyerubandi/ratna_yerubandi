@@ -12,8 +12,15 @@ public class AppTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
+
+        DatabaseConnectionInfo iDatabaseConnectionInfo = new DatabaseConnectionInfo();
+        iDatabaseConnectionInfo.setDriverClass("org.hsqldb.jdbcDriver");
+        iDatabaseConnectionInfo.setUrl("jdbc:hsqldb:testdb");
+        iDatabaseConnectionInfo.setUsername("root");
+        iDatabaseConnectionInfo.setPassword("test");
+
         // instantiate data service
-        dataService = new DataService();
+        dataService = new DataService(iDatabaseConnectionInfo);
     }
 
     public void testApp(){
