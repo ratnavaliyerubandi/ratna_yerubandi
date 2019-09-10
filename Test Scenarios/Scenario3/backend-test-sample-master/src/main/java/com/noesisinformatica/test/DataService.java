@@ -1,5 +1,7 @@
 package com.noesisinformatica.test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +20,12 @@ import java.sql.PreparedStatement;
  */
 public class DataService {
 
-    public DataService(){
+    private final DatabaseConnectionInfo iDatabaseConnectionInfo;
+    public DataService(DatabaseConnectionInfo pDatabaseConnectionInfo){
+        
+        // Database connection Info
+        this.iDatabaseConnectionInfo = pDatabaseConnectionInfo;
+
         // save some initial data
         saveTerm("First term");
         saveTerm("Second term");
@@ -32,9 +39,8 @@ public class DataService {
      * 
      */
     private Connection getConnection() throws Exception {
-	    Class.forName("org.hsqldb.jdbcDriver" );
-		Connection conn = DriverManager.getConnection("jdbc:hsqldb:dsdb", "user", "pwd");
-		
+        Class.forName(this.iDatabaseConnectionInfo.getDriverClass());
+        Connection conn = DriverManager.getConnection(this.iDatabaseConnectionInfo.getUrl(), this.iDatabaseConnectionInfo.getUsername(), this.iDatabaseConnectionInfo.getPassword());
 		return conn;
 	}
 	
@@ -54,7 +60,7 @@ public class DataService {
             rs =  pstmtSelectSQL.executeQuery();
 
             while(rs.next()) {
-            	tempTerm = rs.getString("term")
+            	tempTerm = rs.getString("term");
             }
         }
         catch (Exception e) {
